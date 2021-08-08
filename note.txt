@@ -1,0 +1,8 @@
+dinh nghia thuat ngux:
+https://kubernetes.io/vi/docs/reference/glossary/?fundamental=true
+
+hinh anh minh hoa ingress - ingress controller
+https://xuanthulab.net/trien-khai-nginx-ingress-controller-trong-kubernetes.html
+
+load balencer la gi 
+https://viblo.asia/p/su-dung-kubernetes-ingress-nginx-ingress-controller-de-dinh-tuyen-nhieu-service-khac-nhau-L4x5x8Gg5BM

@@ -1,0 +1,13 @@
+install nginx-controller using helm :
+step 1:
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+step 2:
+helm repo update
+step 3:
+helm install api-controller ingress-nginx/ingress-nginx --namespace nginx-controller --create-namespace
+step 4:
+create cert manager 
+step 5:
+create let enscrypt issuer
+step 6:
+create tls ingress

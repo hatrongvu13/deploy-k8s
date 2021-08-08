@@ -1,0 +1,50 @@
+b1: prepare persistent volumes for redis cluster
+ file : pv-redis.yaml
+apply pv using command: 
+kubectl apply -f pv-redis.yaml
+b2: install regis-cluster using helm 
+command : 
+    helm install --name redis-cluster \
+    --set cluster.slaveCount=3 \
+    --set password= \
+    --set securityContext.enabled=true \
+    --set securityContext.fsGroup=2000 \
+    --set securityContext.runAsUser=1000 \
+    --set volumePermissions.enabled=true \
+    --set master.persistence.enabled=true \
+    --set slave.persistence.enabled=true \
+    --set master.persistence.enabled=true \
+    --set master.persistence.path=/data \
+    --set master.persistence.size=8Gi \
+    --set master.persistence.storageClass=redis-pv \
+    --set slave.persistence.enabled=true \
+    --set slave.persistence.path=/data \
+    --set slave.persistence.size=8Gi \
+    --set slave.persistence.storageClass=redis-pv \
+    stable/redis
+or using file value :
+    kubectl apply -f values.yaml 
+
+b3: connect Redis CLI 
+kubectl exec -it redis-cluster-master-0 bash
+then 
+redis-cli -h redis-cluster-master -a password
+
+helm install --name redis-cluster \
+--set cluster.slaveCount=3 \
+--set password=redis-password \
+--set securityContext.enabled=true \
+--set securityContext.fsGroup=2000 \
+--set securityContext.runAsUser=1000 \
+--set volumePermissions.enabled=true \
+--set master.persistence.enabled=true \
+--set slave.persistence.enabled=true \
+--set master.persistence.enabled=true \
+--set master.persistence.path=/data \
+--set master.persistence.size=8Gi \
+--set master.persistence.storageClass=redis-pv \
+--set slave.persistence.enabled=true \
+--set slave.persistence.path=/data \
+--set slave.persistence.size=8Gi \
+--set slave.persistence.storageClass=redis-pv \
+stable/redis
